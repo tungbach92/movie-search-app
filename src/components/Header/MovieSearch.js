@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function MovieSearch() {
-    const [s, setS] = React.useState([])
+    // const [s, setS] = React.useState([])
     
     return (
         <Box sx={{ flexGrow: 1 }}>

@@ -3,7 +3,7 @@
 import React from 'react';
 
 const MovieItem = ({ movie, isOnlyImage = false }) => {
-    // console.log(movie);
+    console.log(movie);
 
     return (
         <div >

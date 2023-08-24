@@ -3,13 +3,15 @@ import React, { useState, useEffect } from 'react';
 import MovieItem from '../MovieItem';
 
 function MovieHot({ movies }) {
+
     const [highRatedMovies, setHighRatedMovies] = useState([]);
+    
     // const filteredMovies = movies.filter(movie => movie.adult === false);
     // const sortedMovies = filteredMovies.sort((a, b) => b.vote_average - a.vote_average);
 
-    // // Lấy 4 phim có vote_average cao nhất
     // const topRatedMovies = sortedMovies.slice(0, 4);
     // const highRatedMovies = topRatedMovies
+
     useEffect(() => {
         if (movies && movies.length) {
             // Lọc và sắp xếp danh sách các phim theo vote_average

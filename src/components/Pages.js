@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import MovieSearch from '../components/MovieSearch'
-import MoviesList from '../components/MoviesList'
+import MovieSearch from './Header/MovieSearch'
+// import MoviesList from '../components/MoviesList'
 import MovieHot from '../components/MovieHot/MovieHot'
 import axios from 'axios';
-// import MovieItem from '../components/MovieItem'
+import NavBar from './Home/NavBar';
 
 const API_KEY = '629245c430726b8d51cef563512923c6';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -26,7 +26,8 @@ function Pages() {
         <div>
             <MovieSearch />
             <MovieHot movies={popularMovies} />
-            <MoviesList popularMovies={popularMovies}/>
+            {/* <MoviesList popularMovies={popularMovies}/> */}
+            <NavBar />
         </div>
     )
 }
