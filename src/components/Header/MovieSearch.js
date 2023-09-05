@@ -52,7 +52,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function MovieSearch() {
-    // const [s, setS] = React.useState([])
+    const [s, setS] = React.useState([])
+    const ref = React.useRef()
+    // console.log(ref.current.value);
     
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -62,11 +64,11 @@ function MovieSearch() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-                        MOVIES
+                        THE MOVIES
                     </Typography>
                     <Search>
                         <SearchIconWrapper> <SearchIcon /> </SearchIconWrapper>
-                        <StyledInputBase placeholder="Nhập tên phim..." inputProps={{ 'aria-label': 'search' }} />
+                        <StyledInputBase inputRef={ref} value={s} onChange={ e=> setS(e.target.value)} placeholder="Nhập tên phim..." inputProps={{ 'aria-label': 'search' }} />
                     </Search>
                 </Toolbar>
             </AppBar>

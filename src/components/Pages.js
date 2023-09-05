@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import MovieSearch from './Header/MovieSearch'
-// import MoviesList from '../components/MoviesList'
-import MovieHot from '../components/MovieHot/MovieHot'
 import axios from 'axios';
-import NavBar from './Home/NavBar';
+import MovieSearch from './Header/MovieSearch'
+import MovieHot from '../components/MovieHot/MovieHot'
+import NavBar from './Home/Home';
+import Footer from './Footer/Footer';
+import usePopularMovies from '../hooks/usePopularMovies';
+// import MovieDetail from './MovieDetail';
+import MoviesList from '../components/MoviesList'
 
-const API_KEY = '629245c430726b8d51cef563512923c6';
-const BASE_URL = 'https://api.themoviedb.org/3';
+
 
 function Pages() {
 
-    const [popularMovies, setPopularMovies] = useState([]);
+    
 
-    useEffect(() => {
-        axios.get(`${BASE_URL}/movie/popular?api_key=${API_KEY}`)
-            .then(response => {
-                setPopularMovies(response.data.results);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+    const {popularMovies} = usePopularMovies()
 
     return (
         <div>
             <MovieSearch />
+
             <MovieHot movies={popularMovies} />
-            {/* <MoviesList popularMovies={popularMovies}/> */}
-            <NavBar />
+
+            <NavBar popularMovies={popularMovies}/>
+
+            <Footer />
+
+            {/* <MovieDetail movie={popularMovies[1]}/> */}
+
+            <MoviesList popularMovies={popularMovies}/>
         </div>
     )
 }

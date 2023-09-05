@@ -3,7 +3,7 @@
 import React from 'react';
 
 const MovieItem = ({ movie, isOnlyImage = false }) => {
-    console.log(movie);
+    // console.log(movie);
 
     return (
         <div >
@@ -11,10 +11,10 @@ const MovieItem = ({ movie, isOnlyImage = false }) => {
 
             {isOnlyImage && (
                 <div className="flex flex-col">
-                    <h6 className="text-xl">{movie.title}</h6>
-                    <p className="text-sm">Release Date: {movie.release_date}</p>
-                    <p className="text-sm">Overview: {movie.overview}</p>
-                    <p className="text-sm">Rating: {movie.vote_average}</p>
+                    <h6 className="text-xl"> {movie.title} </h6>
+                    <p className="text-sm"> Release Date: {movie.release_date} </p>
+                    <p className="text-sm"> Rating: {movie.vote_average} </p>
+                    {/* <p className="text-sm"> Overview: {movie.overview} </p> */}
                 </div>
             )}
         </div>
