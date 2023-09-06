@@ -1,6 +1,6 @@
 // HighRatedMoviesList.js
 import React, { useState, useEffect } from 'react';
-import MovieItem from '../MovieItem';
+import MovieItem from '../common/MovieItem';
 
 function MovieHot({ movies }) {
 

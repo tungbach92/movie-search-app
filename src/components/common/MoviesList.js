@@ -1,13 +1,16 @@
 import React from 'react';
 import MovieItem from './MovieItem';
 
-function MoviesList({commonCateGoryMovies}) {
+function MoviesList({ commonCateGoryMovies }) {
+
     return (
-        <div>
-            {commonCateGoryMovies && commonCateGoryMovies.length && commonCateGoryMovies.map(movie => (
-                <MovieItem key={movie.id} movie={movie} isOnlyImage={true}/>
-            ))}
-        </div>
+        <>
+            <div className='grid grid-cols-4 '>
+                {commonCateGoryMovies && commonCateGoryMovies.length && commonCateGoryMovies.map(movie => (
+                    <MovieItem key={movie.id} movie={movie} isOnlyImage={true} />
+                ))}
+            </div>
+        </>
     );
 }
 

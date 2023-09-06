@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import MoviesList from '../../MoviesList';
-import { isEqual } from 'lodash';
+import MoviesList from '../../common/MoviesList';
+// import { isEqual } from 'lodash';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,7 +57,7 @@ export default function Movies({ popularMovies }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }} >
+    <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex'}} >
       <Tabs
         orientation="vertical"
         variant="scrollable"

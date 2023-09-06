@@ -15,7 +15,7 @@ export default function NavBar({popularMovies}) {
   };
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <>
 
       <TabContext value={value}>
 
@@ -32,6 +32,6 @@ export default function NavBar({popularMovies}) {
         <TabPanel value="3"> <Member /> </TabPanel>
 
       </TabContext>
-    </Box>
+    </>
   );
 }
