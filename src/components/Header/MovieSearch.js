@@ -51,7 +51,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function MovieSearch() {
 
-    const [search, setSearch] = useAtom(searchAtom)
+    const [data, setData] = useState("");
+    const [, setSearch] = useAtom(searchAtom)
+
+    const handleSearch = (search) => {
+
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -67,12 +72,12 @@ function MovieSearch() {
                     <Search>
                         <SearchIconWrapper> <SearchIcon /> </SearchIconWrapper>
                         <StyledInputBase nputProps={{ 'aria-label': 'search' }}
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            value={data}
+                            onChange={(e) => setData(e.target.value)}
                             placeholder="Nhập tên phim..."
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                    // console.log('kkkk');
+                                    setSearch(data)
                                 }
                             }}
                         />

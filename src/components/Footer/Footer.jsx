@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 function Footer() {
     return (
-        <div className='px-[30px] bg-slate-100 pt-10'>
+        <div className='px-[20px] bg-slate-100 pt-10'>
             <div className='flex gap-16 justify-center ' >
                 <div>
                     <img
