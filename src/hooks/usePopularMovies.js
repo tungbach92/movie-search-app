@@ -7,11 +7,14 @@ const API_KEY = '629245c430726b8d51cef563512923c6';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const usePopularMovies = () => {
+
     const [popularMovies, setPopularMovies] = useState([]);
     const [search] = useAtom(searchAtom);
+    
     console.log(popularMovies);
-    // hiển thị các genre_ids trong mảng 
-    // console.log(new Set(popularMovies?.map(item=>item.genre_ids).flat()));
+    
+    // console.log(new Set(popularMovies?.map(item=>item.genre_ids).flat())); => hiển thị các genre_ids trong mảng 
+
     useEffect(() => {
         fetchMovies();
     }, []);
@@ -31,6 +34,7 @@ const usePopularMovies = () => {
         }
     }
 
+    /*
     useEffect(() => {
         if (!search) {
             fetchMovies()
@@ -52,6 +56,7 @@ const usePopularMovies = () => {
 
         setPopularMovies(movies)
 
+        // xu ly mang voi map 
         // const movies = popularMovies.map(movie => {
         //     if (movie.title.includes(search)) 
         //         return movie
@@ -61,6 +66,8 @@ const usePopularMovies = () => {
 
         // return movies
     }
+    */
+
     return { popularMovies }
 }
 

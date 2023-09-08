@@ -1,12 +1,31 @@
 //  Component hiển thị chi tiết về một bộ phim khi được chọn.
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import usePopularMovies from '../../hooks/usePopularMovies';
 
-const MovieDetail = ({ movie }) => {
+function MovieDetail() {
+    
+    const { id } = useParams();                     // lay id tu url
+    const { popularMovies } = usePopularMovies();   // lay popularMovies
+
+    const [movie, setMovie] = useState('');         // tao state movie, tu id va popularMovies 
+
+    useEffect(() => {
+        // Tìm phim dựa trên id trong danh sách popularMovies
+        const foundMovie = popularMovies.find((m) => m.id.toString() === id);
+
+        if (foundMovie) {
+            setMovie(foundMovie);
+        } else {
+            // 
+        }
+    }, [id, popularMovies]);
+
     return (
         <div>
             <img alt={movie.title} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
-            
+
             <div className="flex flex-col">
                 <h6 className="text-xl"> {movie.title} </h6>
                 <p className="text-sm"> Release Date: {movie.release_date} </p>
@@ -15,8 +34,10 @@ const MovieDetail = ({ movie }) => {
                 <p className="text-sm"> Review: {movie.vote_count} </p>
             </div>
         </div>
+        
     );
 }
 
 export default MovieDetail
+
 

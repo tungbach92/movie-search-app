@@ -5,12 +5,6 @@ import MovieItem from '../common/MovieItem';
 function MovieHot({ movies }) {
 
     const [highRatedMovies, setHighRatedMovies] = useState([]);
-    
-    // const filteredMovies = movies.filter(movie => movie.adult === false);
-    // const sortedMovies = filteredMovies.sort((a, b) => b.vote_average - a.vote_average);
-
-    // const topRatedMovies = sortedMovies.slice(0, 4);
-    // const highRatedMovies = topRatedMovies
 
     useEffect(() => {
         if (movies && movies.length) {
@@ -38,3 +32,10 @@ function MovieHot({ movies }) {
 }
 
 export default MovieHot
+
+
+    // const filteredMovies = movies.filter(movie => movie.adult === false);
+    // const sortedMovies = filteredMovies.sort((a, b) => b.vote_average - a.vote_average);
+
+    // const topRatedMovies = sortedMovies.slice(0, 4);
+    // const highRatedMovies = topRatedMovies

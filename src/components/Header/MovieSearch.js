@@ -10,8 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { searchAtom } from '../../store/search.atom';
 import { useAtom } from 'jotai';
-import { useState, useEffect } from 'react';
-import MoviesList from '../common/MoviesList';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -51,12 +50,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function MovieSearch() {
 
-    const [data, setData] = useState("");
-    const [, setSearch] = useAtom(searchAtom)
+    const [search, setSearch] = useAtom(searchAtom)
 
-    const handleSearch = (search) => {
-
-    }
+    const navigate = useNavigate();
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -72,17 +68,16 @@ function MovieSearch() {
                     <Search>
                         <SearchIconWrapper> <SearchIcon /> </SearchIconWrapper>
                         <StyledInputBase nputProps={{ 'aria-label': 'search' }}
-                            value={data}
-                            onChange={(e) => setData(e.target.value)}
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             placeholder="Nhập tên phim..."
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                    setSearch(data)
+                                    navigate("/search");
                                 }
                             }}
                         />
                     </Search>
-
 
                 </Toolbar>
             </AppBar>

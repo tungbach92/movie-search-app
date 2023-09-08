@@ -2,10 +2,10 @@ import React from 'react';
 import MovieItem from './MovieItem';
 
 function MoviesList({ commonCateGoryMovies }) {
-
+console.log({commonCateGoryMovies});
     return (
         <>
-            <div className='grid grid-cols-4 '>
+            <div className='grid grid-cols-4 gap-8'>
                 {commonCateGoryMovies && commonCateGoryMovies.length && commonCateGoryMovies.map(movie => (
                     <MovieItem key={movie.id} movie={movie} isOnlyImage={true} />
                 ))}
