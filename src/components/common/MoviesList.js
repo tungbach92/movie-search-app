@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieItem from './MovieItem';
 
 function MoviesList({ commonCateGoryMovies }) {
-console.log({commonCateGoryMovies});
+    // console.log({ commonCateGoryMovies });
+
+    const [sortOption, setSortOption] = useState('release_date');
+
+    useEffect(() => {
+        const sortMovies = () => {
+            if (sortOption === 'release_date') {
+                commonCateGoryMovies.sort((a, b) => new Date(a.release_date) - new Date(b.release_date))
+            } else if (sortOption === 'vote_average_Asc') {
+                commonCateGoryMovies.sort((a, b) => b.vote_average - a.vote_average);
+            } else if (sortOption === 'vote_average_Desc') {
+                commonCateGoryMovies.sort((a, b) => a.vote_average - b.vote_average);
+            }
+        }
+
+        sortMovies();
+    }, [sortOption, commonCateGoryMovies])
+
     return (
         <>
+            <select className='border border-solid border-black rounded-md py-3 mb-7 '
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+            >
+                <option value="release_date"> Phim mới nhất </option>
+                <option value="vote_average_Asc"> Đánh giá : Thấp - Cao </option>
+                <option value="vote_average_Desc"> Đánh giá : Cao - Thấp </option>
+            </select>
+
             <div className='grid grid-cols-4 gap-8'>
                 {commonCateGoryMovies && commonCateGoryMovies.length && commonCateGoryMovies.map(movie => (
                     <MovieItem key={movie.id} movie={movie} isOnlyImage={true} />

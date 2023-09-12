@@ -23,11 +23,11 @@ function MovieDetail() {
     }, [id, popularMovies]);
 
     return (
-        <div>
+        <div className='flex m-10 gap-6'>
             <img alt={movie.title} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
 
-            <div className="flex flex-col">
-                <h6 className="text-xl"> {movie.title} </h6>
+            <div className="flex flex-col p-4 text-justify">
+                <h6 className="text-2xl mb-3"> {movie.title} </h6>
                 <p className="text-sm"> Release Date: {movie.release_date} </p>
                 <p className="text-sm"> Overview: {movie.overview} </p>
                 <p className="text-sm"> Rating: {movie.vote_average} </p>
@@ -39,5 +39,3 @@ function MovieDetail() {
 }
 
 export default MovieDetail
-
-
