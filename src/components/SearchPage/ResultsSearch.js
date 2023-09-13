@@ -3,7 +3,6 @@ import MoviesList from '../common/MoviesList';
 import { useAtom } from 'jotai';
 import { searchAtom } from '../../store/search.atom';
 import usePopularMovies from '../../hooks/usePopularMovies';
-import MovieItem from '../common/MovieItem';
 
 export default function ResultsSearch() {
 

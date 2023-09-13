@@ -10,7 +10,7 @@ function Pages() {
     const { popularMovies } = usePopularMovies();
 
     return (
-        <div >
+        <div>
             <MovieSearch />
             <MovieHot movies={popularMovies} />
             <Home popularMovies={popularMovies} />

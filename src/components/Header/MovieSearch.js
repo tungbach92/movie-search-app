@@ -11,6 +11,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import { searchAtom } from '../../store/search.atom';
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -50,9 +54,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function MovieSearch() {
 
+    // dùng cho nút search 
     const [search, setSearch] = useAtom(searchAtom)
 
     const navigate = useNavigate();
+
+
+    // dùng cho phần menu : login, register 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -61,7 +80,9 @@ function MovieSearch() {
                     <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        onClick={() => { navigate("/") }}
+                    >
                         THE MOVIES
                     </Typography>
 
@@ -78,6 +99,32 @@ function MovieSearch() {
                             }}
                         />
                     </Search>
+
+                    <div className='pl-6'>
+                        <AccountCircleIcon onClick={handleClick} />
+                        <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
+                            <MenuItem onClick={() => {
+                                navigate("/login");
+                                handleClose();
+                            }}>
+                                Login
+                            </MenuItem>
+
+                            <MenuItem onClick={() => {
+                                navigate("/register");
+                                handleClose();
+                            }}>
+                                Register
+                            </MenuItem>
+
+                            <MenuItem onClick={() => {
+                                // Handle logout logic here
+                                handleClose();
+                            }}>
+                                Logout
+                            </MenuItem>
+                        </Menu>
+                    </div>
 
                 </Toolbar>
             </AppBar>
