@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { loginAtom } from '../../store/Login.atom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -54,11 +55,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function MovieSearch() {
 
+    const navigate = useNavigate()
+    const [isLoggedIn] = useAtom(loginAtom)
+
     // dùng cho nút search 
     const [search, setSearch] = useAtom(searchAtom)
-
-    const navigate = useNavigate();
-
 
     // dùng cho phần menu : login, register 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -103,27 +104,37 @@ function MovieSearch() {
 
                     <div className='pl-6'>
                         <AccountCircleIcon onClick={handleClick} />
+
                         <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-                            <MenuItem onClick={() => {
-                                navigate("/login");
-                                handleClose();
-                            }}>
-                                Login
-                            </MenuItem>
+                            {!isLoggedIn ?
+                                (
+                                    <div>
+                                        <MenuItem onClick={() => {
+                                            navigate("/login");
+                                            handleClose();
+                                        }}>
+                                            Login
+                                        </MenuItem>
+                                        <MenuItem onClick={() => {
+                                            navigate("/register");
+                                            handleClose();
+                                        }}>
+                                            Register
+                                        </MenuItem>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <MenuItem onClick={() => {
+                                            // Handle logout logic here
+                                            handleClose();
+                                        }}>
+                                            Logout
+                                        </MenuItem>
+                                    </div>
 
-                            <MenuItem onClick={() => {
-                                navigate("/register");
-                                handleClose();
-                            }}>
-                                Register
-                            </MenuItem>
+                                )
 
-                            <MenuItem onClick={() => {
-                                // Handle logout logic here
-                                handleClose();
-                            }}>
-                                Logout
-                            </MenuItem>
+                            }
                         </Menu>
                     </div>
 

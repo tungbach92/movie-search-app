@@ -16,10 +16,11 @@ function Login() {
         }
     ]
 
+    const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom)
+    
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom)
-    const [error, setError] = useState('');
+    const [error, setError] = useState('')
 
     const handleUsername = (event) => {
         setUsername(event.target.value);
