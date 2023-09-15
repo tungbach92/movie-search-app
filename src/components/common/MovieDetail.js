@@ -10,30 +10,32 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import { useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { loginAtom } from '../../store/Login.atom';
 
 function MovieDetail() {
 
     const { id } = useParams();                     // lay id tu url
     const { popularMovies } = usePopularMovies();   // lay popularMovies
-
     const [movie, setMovie] = useState('');         // tao state movie, tu id va popularMovies 
 
+    const navigate = useNavigate();
+
+    const [isLoggedIn] = useAtom(loginAtom)
 
     const [open, setOpen] = React.useState(true);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         // setOpen(false);
     };
 
 
     useEffect(() => {
-        // Tìm phim dựa trên id trong danh sách popularMovies
-        const foundMovie = popularMovies.find((m) => m.id.toString() === id);
+        const foundMovie = popularMovies.find((m) => m.id.toString() === id);   // Tìm phim dựa trên id trong danh sách popularMovies
 
         if (foundMovie) {
             setMovie(foundMovie);
@@ -41,6 +43,24 @@ function MovieDetail() {
             // 
         }
     }, [id, popularMovies]);
+
+    // Bạn cần kiểm tra isLoggedIn ở đây và hiển thị dialog chỉ khi người dùng chưa đăng nhập
+    if (!isLoggedIn) {
+        return (
+            <Dialog aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"
+                open={open}
+                onClose={handleClose}
+            >
+                <DialogTitle id="alert-dialog-title"> {"Thông báo"} </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description"> Vui lòng đăng nhập để tiếp tục sử dụng dịch vụ </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={() => navigate('/login')}> Đồng ý </Button>
+                </DialogActions>
+            </Dialog>
+        );
+    }
 
     return (
         <div className='flex m-[70px] gap-6'>
@@ -54,30 +74,7 @@ function MovieDetail() {
                 <p className="text-sm"> Overview: {movie.overview} </p>
             </div>
 
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {"Use Google's location service?"}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} autoFocus>
-                        Agree
-                    </Button>
-                </DialogActions>
-            </Dialog>
-
-        </div>
-
+        </div >
     );
 }
 

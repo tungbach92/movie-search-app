@@ -1,21 +1,24 @@
 import React, { useState } from 'react'
+import Pages from '../Pages';
+import { useAtom } from 'jotai';
+import { loginAtom } from '../../store/Login.atom'
 import MovieSearch from '../Header/MovieSearch';
 
 function Login() {
     const database = [
         {
-            username: "user",
+            username: "1",
             password: "1"
         },
         {
-            username: "user2",
+            username: "1",
             password: "2"
         }
     ]
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom)
     const [error, setError] = useState('');
 
     const handleUsername = (event) => {
@@ -25,7 +28,7 @@ function Login() {
 
     const handlePassword = (event) => {
         setPassword(event.target.value);
-        setError('');       
+        setError('');
     }
 
     const handleLogin = (event) => {
@@ -40,40 +43,42 @@ function Login() {
 
     return (
         <div>
-            <MovieSearch />
             {isLoggedIn ? (
                 <div className="text-xl font-bold text-center pt-3">
-                    Bạn đã đăng nhập thành công!
+                    <Pages />
                 </div>
             ) : (
-                <div className='m-[150px] bg-[#f0fdf4]'>
-                    <div className='border border-solid border-black rounded-md p-8 '>
-                        <div className='pb-6 grid grid-cols-3'>
-                            <label> Email : </label>
-                            <input type="text" className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                                placeholder='Email'
-                                onChange={handleUsername}
-                            />
-                        </div>
-                        <div className='pb-6 grid grid-cols-3'>
-                            <label> Mật khẩu : </label>
-                            <input type="password" className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                                placeholder='Mật khẩu'
-                                onChange={handlePassword}
-                            />
-                        </div>
-
-                        <div className='text-xl font-bold text-center pt-5'>
-                            <button className='hover:text-blue-500' onClick={handleLogin}>
-                                Đăng nhập
-                            </button>
-                        </div>
-
-                        {error && (
-                            <div className="text-red-500 text-center pt-3">
-                                {error}
+                <div>
+                    <MovieSearch />
+                    <div className='m-[150px] bg-[#f0fdf4]'>
+                        <div className='border border-solid border-black rounded-md p-8 '>
+                            <div className='pb-6 grid grid-cols-3'>
+                                <label> Email : </label>
+                                <input type="text" className='border border-solid border-current rounded-lg col-span-2 pl-4'
+                                    placeholder='Email'
+                                    onChange={handleUsername}
+                                />
                             </div>
-                        )}
+                            <div className='pb-6 grid grid-cols-3'>
+                                <label> Mật khẩu : </label>
+                                <input type="password" className='border border-solid border-current rounded-lg col-span-2 pl-4'
+                                    placeholder='Mật khẩu'
+                                    onChange={handlePassword}
+                                />
+                            </div>
+
+                            <div className='text-xl font-bold text-center pt-5'>
+                                <button className='hover:text-blue-500' onClick={handleLogin}>
+                                    Đăng nhập
+                                </button>
+                            </div>
+
+                            {error && (
+                                <div className="text-red-500 text-center pt-3">
+                                    {error}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

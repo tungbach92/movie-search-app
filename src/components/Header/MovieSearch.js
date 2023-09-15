@@ -81,6 +81,7 @@ function MovieSearch() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        className='hover:text-[#fde047]'
                         onClick={() => { navigate("/") }}
                     >
                         THE MOVIES

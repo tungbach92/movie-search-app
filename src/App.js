@@ -12,7 +12,6 @@ function App() {
       <Routes>
         <Route index element={<Pages />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/detail" element={<MovieDetail />} />
         <Route path="movie/:id" element={<MovieDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

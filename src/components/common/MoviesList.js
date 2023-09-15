@@ -22,7 +22,7 @@ function MoviesList({ commonCateGoryMovies }) {
 
     return (
         <>
-            <select className='border border-solid border-black rounded-md py-3 mb-7 '
+            <select className='border border-solid border-black rounded-md py-3 mb-7'
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
             >
