@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import MovieSearch from '../Header/MovieSearch';
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebaseConfig';
 
 function Register() {
+
   const [formData, setFormData] = useState({
     fullName: '',
-    password: '',
-    confirmPassword: '',
-    birthdate: '',
-    phone: '',
+    email: '', // Thay thế formData.Name thành formData.email
   });
 
   const handleChange = (e) => {
@@ -15,13 +15,20 @@ function Register() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    // Gửi dữ liệu lên API ở đây sử dụng fetch hoặc thư viện HTTP khác
-    // formData chứa dữ liệu của biểu mẫu để gửi đi
-    // ...
+  const handleRegister = async () => {
+    console.log(123);
+    try {
+      const { email } = formData;
 
-    // Sau khi gửi thành công, bạn có thể xử lý phản hồi từ máy chủ và thực hiện các thao tác phù hợp
+      // Sử dụng hàm createUserWithEmailAndPassword để tạo tài khoản người dùng mới
+      // Không cần mật khẩu vì bạn đang sử dụng đăng ký bằng Gmail
+      await createUserWithEmailAndPassword(auth, 'thanh11122@gmail.com', '123456'); // Mật khẩu được để trống
+
+      // Nếu đăng ký thành công, bạn có thể thực hiện các hành động tiếp theo
+      // Sau đó, bạn có thể chuyển họ đến trang chính hoặc trang đăng nhập
+    } catch (error) {
+      console.error("Lỗi đăng ký:", error); // Xử lý lỗi nếu đăng ký không thành công
+    }
   };
 
   return (
@@ -29,14 +36,14 @@ function Register() {
       <MovieSearch />
 
       <div className='m-[150px] bg-[#f0fdf4] border border-solid border-black rounded-md p-8'>
-        <form onSubmit={handleRegister}>
+        <form>
           <div>
             <div className='pb-6 grid grid-cols-3'>
               <label htmlFor="fullName"> Họ tên :</label>
               <input type="text" name="fullName" id="fullName" required
                 placeholder='VD: Huong ...'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.Name}
+                value={formData.fullName}
                 onChange={handleChange}
               />
             </div>
@@ -45,49 +52,13 @@ function Register() {
               <input type="text" name="email" id="email" required
                 placeholder='huongmai17@gmail.com'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.Name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="password"> Mật khẩu :</label>
-              <input type="password" name="password" id="password" required
-                placeholder='Mật khẩu'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="confirmPassword"> Nhập lại mật khẩu :</label>
-              <input type="password" name="confirmPassword" id="confirmPassword" required
-                placeholder='Nhập lại mật khẩu'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="birthdate"> Ngày sinh :</label>
-              <input type="text" name="birthdate" id="birthdate" required
-                placeholder='VD : 02/02/2010'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.birthdate}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="phone"> Số điện thoại :</label>
-              <input type="text" name="phone" id="phone" required
-                placeholder='0937176888'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.phone}
+                value={formData.email} // Sử dụng formData.email thay vì formData.Name
                 onChange={handleChange}
               />
             </div>
           </div>
 
-          <div className='text-xl font-bold text-center pt-5 text-cyan-500 '>
+          <div onClick={handleRegister} className='text-xl font-bold text-center pt-5 text-cyan-500 '>
             <button type="submit" className='hover:text-blue-500'> Đăng ký </button>
           </div>
         </form>
