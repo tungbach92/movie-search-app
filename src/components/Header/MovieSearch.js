@@ -125,7 +125,7 @@ function MovieSearch() {
                                 ) : (
                                     <div>
                                         <MenuItem onClick={() => {
-                                            // Handle logout logic here
+                                            navigate("/logout")
                                             handleClose();
                                         }}>
                                             Logout
@@ -133,7 +133,6 @@ function MovieSearch() {
                                     </div>
 
                                 )
-
                             }
                         </Menu>
                     </div>

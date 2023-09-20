@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Pages from '../Pages';
 import { useAtom } from 'jotai';
 import { loginAtom } from '../../store/Login.atom'
@@ -20,17 +20,8 @@ function Login() {
     
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
     const [error, setError] = useState('')
-
-    const handleUsername = (event) => {
-        setUsername(event.target.value);
-        setError('');       // Xóa thông báo lỗi khi người dùng thay đổi tên đăng nhập
-    }
-
-    const handlePassword = (event) => {
-        setPassword(event.target.value);
-        setError('');
-    }
 
     const handleLogin = (event) => {
         const user = database.find((user) => user.username === username && user.password === password);
@@ -40,12 +31,13 @@ function Login() {
         } else {
             setError('Tên đăng nhập hoặc mật khẩu không đúng.');
         }
-    };
+    }
+
 
     return (
         <div>
             {isLoggedIn ? (
-                <div className="text-xl font-bold text-center pt-3">
+                <div>
                     <Pages />
                 </div>
             ) : (
@@ -57,14 +49,16 @@ function Login() {
                                 <label> Email : </label>
                                 <input type="text" className='border border-solid border-current rounded-lg col-span-2 pl-4'
                                     placeholder='Email'
-                                    onChange={handleUsername}
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
                             <div className='pb-6 grid grid-cols-3'>
                                 <label> Mật khẩu : </label>
                                 <input type="password" className='border border-solid border-current rounded-lg col-span-2 pl-4'
                                     placeholder='Mật khẩu'
-                                    onChange={handlePassword}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
 
@@ -73,6 +67,8 @@ function Login() {
                                     Đăng nhập
                                 </button>
                             </div>
+
+                            // 
 
                             {error && (
                                 <div className="text-red-500 text-center pt-3">

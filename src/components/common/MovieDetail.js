@@ -1,5 +1,3 @@
-//  Component hiển thị chi tiết về một bộ phim khi được chọn.
-
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import usePopularMovies from '../../hooks/usePopularMovies';
@@ -13,6 +11,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { loginAtom } from '../../store/Login.atom';
+import MovieSearch from '../Header/MovieSearch';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 function MovieDetail() {
 
@@ -63,18 +65,32 @@ function MovieDetail() {
     }
 
     return (
-        <div className='flex m-[70px] gap-6'>
-            <img alt={movie.title} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
+        <>
+            <MovieSearch />
 
-            <div className="flex flex-col p-4 text-justify">
-                <h6 className="text-2xl mb-3"> {movie.title} </h6>
-                <p className="text-sm"> Release Date: {movie.release_date} </p>
-                <p className="text-sm"> Rating: {movie.vote_average} <StarIcon /> </p>
-                <p className="text-sm"> Review: {movie.vote_count} </p>
-                <p className="text-sm"> Overview: {movie.overview} </p>
-            </div>
+            <div className='flex m-[70px] gap-6'>
+                <img alt={movie.title} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
 
-        </div >
+                <div>
+                    <div className="flex flex-col p-4 text-justify">
+                        <h6 className="text-2xl mb-3"> {movie.title} </h6>
+                        <p className="text-sm"> Release Date: {movie.release_date} </p>
+                        <p className="text-sm"> Rating: {movie.vote_average} <StarIcon /> </p>
+                        <p className="text-sm"> Review: {movie.vote_count} </p>
+                        <p className="text-sm"> Overview: {movie.overview} </p>
+                    </div>
+                    <div className='flex pt-8 gap-6 flex-row-reverse '>
+                        <button onClick={navigate('')} className='border border-solid border-black rounded-md p-2 hover:bg-[#ecfeff]'>
+                            Xem phim
+                        </button>
+                        <button onClick={navigate('')} className='border border-solid border-black rounded-md p-2 hover:bg-[#ecfeff]'>
+                            Xem Trailer
+                        </button>
+                    </div>
+                </div>
+            </div >
+
+        </>
     );
 }
 

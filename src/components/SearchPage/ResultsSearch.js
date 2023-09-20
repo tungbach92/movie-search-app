@@ -16,17 +16,17 @@ export default function ResultsSearch() {
         }
 
         return popularMovies.filter((movie) =>
-            movie.title.includes(search)
-        );
+            movie.title.toLowerCase().includes(search.toLowerCase())
+        )
     };
 
     return (
-        <>
-            <h2 className='my-6 font-medium text-3xl text-center'> Kết quả tìm kiếm cho: {search} </h2>
+        <div className='bg-[#f3f4f6]'>
+            <h2 className='py-8 font-medium text-3xl text-center'> Kết quả tìm kiếm cho: {search} </h2>
 
-            <div className='flex flex-1 justify-center my-12'>
+            <div className='p-16'>
                 <MoviesList commonCateGoryMovies={filterPopularMovies()} />
             </div>
-        </>
+        </div>
     )
 }

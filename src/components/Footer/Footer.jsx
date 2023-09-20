@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 function Footer() {
     return (
-        <div className='px-[20px] bg-slate-100 pt-10'>
+        <div className='px-[20px] bg-slate-100 pt-6'>
             <div className='flex gap-16 justify-center ' >
                 <div>
                     <img
@@ -30,7 +30,7 @@ function Footer() {
                 </div>
             </div>
 
-            <div className='mt-10 pb-10 text-center'>
+            <div className='mt-6 pb-10 text-center'>
                 <h1 className="text-2xl font-medium"> Liên hệ </h1>
                 <h1> CÔNG TY CỔ PHẦN MOVIES MEDIA </h1>
                 <h2> Giấy chứng nhận ĐKKD số: 0106633482 - Đăng ký lần đầu ngày 08/09/2014 tại Sở Kế hoạch và Đầu tư Thành phố Hà Nội </h2>
