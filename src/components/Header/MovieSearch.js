@@ -16,6 +16,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { loginAtom } from '../../store/Login.atom';
+import { userAtom } from '../../store/user.atom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -57,6 +58,7 @@ function MovieSearch() {
 
     const navigate = useNavigate()
     const [isLoggedIn] = useAtom(loginAtom)
+    const [user] = useAtom(userAtom)
 
     // dùng cho nút search 
     const [search, setSearch] = useAtom(searchAtom)
@@ -106,7 +108,7 @@ function MovieSearch() {
                         <AccountCircleIcon onClick={handleClick} />
 
                         <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-                            {!isLoggedIn ?
+                            {!user ?
                                 (
                                     <div>
                                         <MenuItem onClick={() => {

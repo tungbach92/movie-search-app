@@ -6,8 +6,11 @@ import { auth } from '../../firebaseConfig';
 const defaultData = {
   fullName: '',
   email: '',
-  password: ''
+  password: '',
+  birthdate: '',
+  gender: 'female',
 }
+
 function Register() {
 
   const [formData, setFormData] = useState(defaultData);
@@ -20,16 +23,19 @@ function Register() {
   const handleRegister = async () => {
     try {
       const { email, password } = formData
-      console.log(email, password)
-      if (!email || !password) return;
-      await createUserWithEmailAndPassword(auth, email, password).then(user => {
-        alert('dang ky thanh cong roi')
-      })
+
+      if (!email || !password) {
+        alert('Vui lòng nhập email và mật khẩu.');
+        return;
+      }
+
+      await createUserWithEmailAndPassword(auth, email, password)
+      alert('ok')
 
     } catch (error) {
       alert("Lỗi đăng ký:", error);    // Xử lý lỗi nếu đăng ký không thành công
     } finally {
-      // setFormData(defaultData)
+      setFormData(defaultData)
     }
   };
 
@@ -59,14 +65,35 @@ function Register() {
               />
             </div>
             <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="fullName"> Mật khẩu :</label>
+              <label htmlFor="password"> Mật khẩu :</label>
               <input type="text" name="password" id="password" required
-                placeholder='Nhập mật khẩu'
+                placeholder='Tối thiểu 6 kí tự'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
+          </div>
+          <div className='pb-6 grid grid-cols-3'>
+            <label htmlFor="birthdate"> Ngày sinh :</label>
+            <input type="text" name="birthdate" id="birthdate" required
+              placeholder='VD : 02/02/2010'
+              className='border border-solid border-current rounded-lg col-span-2 pl-4'
+              value={formData.birthdate}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='pb-6 grid grid-cols-3'>
+            <label htmlFor="gender"> Giới tính :</label>
+            <select name="gender" id="gender" required
+              className='border border-solid border-current rounded-lg col-span-2 pl-4'
+              value={formData.gender}
+              onChange={handleChange}
+            >
+              <option value="male">Nam</option>
+              <option value="female">Nữ</option>
+              <option value="other">Khác</option>
+            </select>
           </div>
 
           <div onClick={handleRegister} className='text-xl font-bold text-center pt-5 text-cyan-500 '>

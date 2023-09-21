@@ -15,6 +15,7 @@ import MovieSearch from '../Header/MovieSearch';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { userAtom } from '../../store/user.atom';
 
 function MovieDetail() {
 
@@ -25,6 +26,7 @@ function MovieDetail() {
     const navigate = useNavigate();
 
     const [isLoggedIn] = useAtom(loginAtom)
+    const [user] = useAtom(userAtom)
 
     const [open, setOpen] = React.useState(true);
 
@@ -47,7 +49,7 @@ function MovieDetail() {
     }, [id, popularMovies]);
 
     // Bạn cần kiểm tra isLoggedIn ở đây và hiển thị dialog chỉ khi người dùng chưa đăng nhập
-    if (!isLoggedIn) {
+    if (!user) {
         return (
             <Dialog aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description"
                 open={open}

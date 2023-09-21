@@ -7,9 +7,10 @@ import MovieSearch from '../Header/MovieSearch';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Pages from '../Pages';
 import { auth } from '../../firebaseConfig';
+import { userAtom } from '../../store/user.atom';
 
 function Login() {
-    const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom);
+    const [user, setUser] = useAtom(userAtom)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,8 +19,8 @@ function Login() {
 
         try {
             // Sử dụng hàm signInWithEmailAndPassword để đăng nhập với email và mật khẩu
-            await signInWithEmailAndPassword(auth, username, password);
-            setIsLoggedIn(true); // Nếu đăng nhập thành công, setIsLoggedIn(true) để chuyển trạng thái đăng nhập
+            const user = await signInWithEmailAndPassword(auth, username, password);
+            setUser(user);
         } catch (error) {
             // Xử lý lỗi từ Firebase và hiển thị thông báo lỗi tương ứng
             const errorCode = error.code;
@@ -30,7 +31,7 @@ function Login() {
 
     return (
         <div>
-            {isLoggedIn ? (
+            {user ? (
                 <div>
                     <Pages />
                 </div>

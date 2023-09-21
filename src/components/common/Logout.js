@@ -9,21 +9,23 @@ import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { logoutAtom } from '../../store/Logout.atom';
 import { loginAtom } from '../../store/Login.atom'
+import { userAtom } from '../../store/user.atom';
 
 function Logout() {
 
     const [isLogout] = useAtom(logoutAtom)
-    const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom)
+    // const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom)
 
     const [open, setOpen] = React.useState(true);
     const navigate = useNavigate();
+    const [user, setUser] = useAtom(userAtom)
 
     const handleClickOpen = () => {
         setOpen(true);
     }
 
     const handleLogout = () => {
-        setIsLoggedIn(false);
+        setUser(null)
         navigate('/login');
     };
 
