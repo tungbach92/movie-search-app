@@ -8,7 +8,6 @@ import Login from './components/common/Login';
 import Register from './components/common/Register';
 import Logout from './components/common/Logout';
 
-
 function App() {
  
   return (

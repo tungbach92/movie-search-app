@@ -3,12 +3,14 @@ import MovieSearch from '../Header/MovieSearch';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebaseConfig';
 
+const defaultData = {
+  fullName: '',
+  email: '',
+  password: ''
+}
 function Register() {
 
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '', // Thay thế formData.Name thành formData.email
-  });
+  const [formData, setFormData] = useState(defaultData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,18 +18,18 @@ function Register() {
   };
 
   const handleRegister = async () => {
-    console.log(123);
     try {
-      const { email } = formData;
+      const { email, password } = formData
+      console.log(email, password)
+      if (!email || !password) return;
+      await createUserWithEmailAndPassword(auth, email, password).then(user => {
+        alert('dang ky thanh cong roi')
+      })
 
-      // Sử dụng hàm createUserWithEmailAndPassword để tạo tài khoản người dùng mới
-      // Không cần mật khẩu vì bạn đang sử dụng đăng ký bằng Gmail
-      await createUserWithEmailAndPassword(auth, 'thanh11122@gmail.com', '123456'); // Mật khẩu được để trống
-
-      // Nếu đăng ký thành công, bạn có thể thực hiện các hành động tiếp theo
-      // Sau đó, bạn có thể chuyển họ đến trang chính hoặc trang đăng nhập
     } catch (error) {
-      console.error("Lỗi đăng ký:", error); // Xử lý lỗi nếu đăng ký không thành công
+      alert("Lỗi đăng ký:", error);    // Xử lý lỗi nếu đăng ký không thành công
+    } finally {
+      // setFormData(defaultData)
     }
   };
 
@@ -53,6 +55,15 @@ function Register() {
                 placeholder='huongmai17@gmail.com'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
                 value={formData.email} // Sử dụng formData.email thay vì formData.Name
+                onChange={handleChange}
+              />
+            </div>
+            <div className='pb-6 grid grid-cols-3'>
+              <label htmlFor="fullName"> Mật khẩu :</label>
+              <input type="text" name="password" id="password" required
+                placeholder='Nhập mật khẩu'
+                className='border border-solid border-current rounded-lg col-span-2 pl-4'
+                value={formData.password}
                 onChange={handleChange}
               />
             </div>
