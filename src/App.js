@@ -14,16 +14,13 @@ import { userAtom } from './store/user.atom';
 
 function App() {
   const [, setUser] = useAtom(userAtom)
-  
+
+  // khi request k bị logout
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         setUser(user)
       } else {
-        // User is signed out
-        // ...
         setUser(null)
       }
     });

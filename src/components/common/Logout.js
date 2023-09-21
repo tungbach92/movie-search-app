@@ -7,14 +7,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { logoutAtom } from '../../store/Logout.atom';
-import { loginAtom } from '../../store/Login.atom'
 import { userAtom } from '../../store/user.atom';
 
 function Logout() {
-
-    const [isLogout] = useAtom(logoutAtom)
-    // const [isLoggedIn, setIsLoggedIn] = useAtom(loginAtom)
 
     const [open, setOpen] = React.useState(true);
     const navigate = useNavigate();

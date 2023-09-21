@@ -10,11 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { loginAtom } from '../../store/Login.atom';
 import MovieSearch from '../Header/MovieSearch';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import { userAtom } from '../../store/user.atom';
 
 function MovieDetail() {
@@ -25,7 +21,6 @@ function MovieDetail() {
 
     const navigate = useNavigate();
 
-    const [isLoggedIn] = useAtom(loginAtom)
     const [user] = useAtom(userAtom)
 
     const [open, setOpen] = React.useState(true);

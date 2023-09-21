@@ -11,11 +11,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { searchAtom } from '../../store/search.atom';
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { loginAtom } from '../../store/Login.atom';
 import { userAtom } from '../../store/user.atom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -57,7 +55,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function MovieSearch() {
 
     const navigate = useNavigate()
-    const [isLoggedIn] = useAtom(loginAtom)
     const [user] = useAtom(userAtom)
 
     // dùng cho nút search 
