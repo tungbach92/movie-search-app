@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MovieSearch from '../Header/MovieSearch';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebaseConfig';
+import { Link } from 'react-router-dom';
 
 const defaultData = {
   fullName: '',
@@ -30,8 +31,7 @@ function Register() {
       }
 
       await createUserWithEmailAndPassword(auth, email, password)
-      alert('ok')
-
+      alert('Bạn đã đăng ký thành công.')
     } catch (error) {
       alert("Lỗi đăng ký:", error);    // Xử lý lỗi nếu đăng ký không thành công
     } finally {
@@ -44,7 +44,7 @@ function Register() {
       <MovieSearch />
 
       <div className='m-[150px] bg-[#f0fdf4] border border-solid border-black rounded-md p-8'>
-        <form>
+        <form className='max-h-[500px]'>
           <div>
             <div className='pb-6 grid grid-cols-3'>
               <label htmlFor="fullName"> Họ tên :</label>
@@ -99,6 +99,12 @@ function Register() {
           <div onClick={handleRegister} className='text-xl font-bold text-center pt-5 text-cyan-500 '>
             <button type="submit" className='hover:text-blue-500'> Đăng ký </button>
           </div>
+
+          <p className='text-center italic'> Bằng cách đăng ký, bạn đã đồng ý với Điều khoản sử dụng </p>
+
+          <p className='text-center pt-6 '>
+            Bạn đã có tài khoản, <Link to="/login" className='underline hover:text-cyan-600 font-medium'> ĐĂNG NHẬP </Link>
+          </p>
         </form>
       </div>
     </div>

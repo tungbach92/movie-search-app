@@ -75,12 +75,12 @@ function MovieSearch() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="fixed" sx={{ backgroundColor: 'black' }}>
                 <Toolbar>
-                    <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
+                    <IconButton size="large" edge="start" color="inherit"  sx={{ mr: 2 }}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                    <Typography variant="h6"component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                         className='hover:text-[#fde047]'
                         onClick={() => { navigate("/") }}
                     >
@@ -89,8 +89,7 @@ function MovieSearch() {
 
                     <Search>
                         <SearchIconWrapper> <SearchIcon /> </SearchIconWrapper>
-                        <StyledInputBase nputProps={{ 'aria-label': 'search' }}
-                            value={search}
+                        <StyledInputBase nputProps={{ 'aria-label': 'search' }} value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Nhập tên phim..."
                             onKeyDown={(e) => {
@@ -123,6 +122,15 @@ function MovieSearch() {
                                     </div>
                                 ) : (
                                     <div>
+                                        <MenuItem>
+                                            Xin chào, ...
+                                        </MenuItem>
+                                        <MenuItem onClick={() => {
+                                            navigate("/profile")
+                                            handleClose();
+                                        }}>
+                                            Hồ sơ của bạn
+                                        </MenuItem>
                                         <MenuItem onClick={() => {
                                             navigate("/logout")
                                             handleClose();
@@ -130,7 +138,6 @@ function MovieSearch() {
                                             Logout
                                         </MenuItem>
                                     </div>
-
                                 )
                             }
                         </Menu>

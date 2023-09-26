@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useAtom } from 'jotai';
-import { loginAtom } from '../../store/Login.atom';
 import MovieSearch from '../Header/MovieSearch';
-
-// Import Firebase Authentication functions
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth'; // Import Firebase Authentication functions
 import Pages from '../Pages';
 import { auth } from '../../firebaseConfig';
 import { userAtom } from '../../store/user.atom';
+import { Link } from 'react-router-dom';
 
 function Login() {
     const [user, setUser] = useAtom(userAtom)
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -27,7 +26,7 @@ function Login() {
             const errorMessage = error.message;
             console.error("Lỗi đăng nhập:", errorCode, errorMessage);
         }
-    };
+    }
 
     return (
         <div>
@@ -38,10 +37,10 @@ function Login() {
             ) : (
                 <div>
                     <MovieSearch />
-                    <div className='m-[150px] bg-[#f0fdf4]'>
+                    <div className=' mt-[20vh] m-auto bg-[#f0fdf4] w-[600px] '>
                         <div className='border border-solid border-black rounded-md p-8 '>
                             <form onSubmit={handleLogin}>
-                                <div className='pb-6 grid grid-cols-3'>
+                                <div className='pb-6 grid grid-cols-3 '>
                                     <label> Email : </label>
                                     <input
                                         type="text"
@@ -67,6 +66,10 @@ function Login() {
                                         Đăng nhập
                                     </button>
                                 </div>
+
+                                <p className='text-center pt-6 '>
+                                    Bạn chưa có tài khoản, <Link to="/register" className='underline hover:text-cyan-600 font-medium'> ĐĂNG KÝ NGAY </Link>
+                                </p>
                             </form>
                         </div>
                     </div>

@@ -21,8 +21,8 @@ function MoviesList({ commonCateGoryMovies }) {
     }, [sortOption, commonCateGoryMovies])
 
     return (
-        <>
-            <select className='border border-solid border-black rounded-md py-3 mb-7'
+        <div>
+            <select className='border border-solid border-black rounded-md py-3 mb-7 '
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
             >
@@ -31,12 +31,12 @@ function MoviesList({ commonCateGoryMovies }) {
                 <option value="vote_average_Desc"> Đánh giá : Cao - Thấp </option>
             </select>
 
-            <div className='grid grid-cols-4 gap-8'>
+            <div className='grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4'>
                 {commonCateGoryMovies && commonCateGoryMovies.length && commonCateGoryMovies.map(movie => (
                     <MovieItem key={movie.id} movie={movie} isOnlyImage={true} />
                 ))}
             </div>
-        </>
+        </div>
     );
 }
 

@@ -65,7 +65,7 @@ function MovieDetail() {
         <>
             <MovieSearch />
 
-            <div className='flex m-[70px] gap-6'>
+            <div className='flex m-[100px] gap-6 '>
                 <img alt={movie.title} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
 
                 <div>

@@ -18,7 +18,7 @@ export default function NavBar({popularMovies}) {
       <TabContext value={value}>
 
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} className='mt-10 font-bold bg-slate-200'>
+          <TabList onChange={handleChange} className='mt-10 bg-slate-200'>
             <Tab label="PHIM" value="1" />
             <Tab label="GIÁ VÉ" value="2" />
           </TabList>

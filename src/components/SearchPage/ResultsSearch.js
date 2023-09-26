@@ -21,8 +21,8 @@ export default function ResultsSearch() {
     };
 
     return (
-        <div className='bg-[#f3f4f6]'>
-            <h2 className='py-8 font-medium text-3xl text-center'> Kết quả tìm kiếm cho: {search} </h2>
+        <div className='bg-black'>
+            <h2 className='py-8 font-medium text-3xl text-center text-white'> Kết quả tìm kiếm cho: {search} </h2>
 
             <div className='p-16'>
                 <MoviesList commonCateGoryMovies={filterPopularMovies()} />

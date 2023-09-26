@@ -19,8 +19,8 @@ function MovieHot({ movies }) {
     }, [movies]);
 
     return (
-        <div >
-            <h1 className='text-center mt-6 font-medium'> TOP 4 BỘ PHIM CÓ ĐÁNH GIÁ CAO NHẤT </h1>
+        <div className='pt-[64px]' >
+            <h1 className='text-center mt-6 font-medium text-white'> TOP 4 BỘ PHIM CÓ ĐÁNH GIÁ CAO NHẤT </h1>
 
             <div className='flex gap-5 justify-center mt-8 '>
                 {highRatedMovies.map(movie => (

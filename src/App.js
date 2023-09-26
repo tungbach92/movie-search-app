@@ -11,6 +11,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebaseConfig';
 import { useAtom } from 'jotai';
 import { userAtom } from './store/user.atom';
+import  Profile from './components/Profile/Profile'
 
 function App() {
   const [, setUser] = useAtom(userAtom)
@@ -35,6 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
