@@ -17,15 +17,15 @@ function App() {
   const [, setUser] = useAtom(userAtom)
 
   // khi request k bị logout
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user)
-      } else {
-        setUser(null)
-      }
-    });
-  },[])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setUser(user)
+  //     } else {
+  //       setUser(null)
+  //     }
+  //   });
+  // },[])
 
   return (
     <BrowserRouter>

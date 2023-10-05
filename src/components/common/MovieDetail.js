@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import usePopularMovies from '../../hooks/usePopularMovies';
 import StarIcon from '@mui/icons-material/Star';
 import Button from '@mui/material/Button';
@@ -77,12 +77,17 @@ function MovieDetail() {
                         <p className="text-sm"> Overview: {movie.overview} </p>
                     </div>
                     <div className='flex pt-8 gap-6 flex-row-reverse '>
-                        <button onClick={navigate('')} className='border border-solid border-black rounded-md p-2 hover:bg-[#ecfeff]'>
-                            Xem phim
-                        </button>
-                        <button onClick={navigate('')} className='border border-solid border-black rounded-md p-2 hover:bg-[#ecfeff]'>
-                            Xem Trailer
-                        </button>
+                        <Link to='https://www.youtube.com/watch?v=1sITMF-wxto&pp=ygUNdHJhaWxlciBwaGltIA%3D%3D'>
+                            <button className='border border-solid border-black rounded-md p-2 hover:bg-[#ecfeff]'>
+                                Xem phim
+                            </button>
+                        </Link>
+                        <Link to='https://www.youtube.com/watch?v=IvTvR8paEm0&pp=ygUNdHJhaWxlciBwaGltIA%3D%3D'>
+                            <button className='border border-solid border-black rounded-md p-2 hover:bg-[#ecfeff]'>
+                                Xem Trailer
+                            </button>
+                        </Link>
+                        
                     </div>
                 </div>
             </div >

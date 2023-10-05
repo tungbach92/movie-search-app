@@ -6,28 +6,45 @@ import Pages from '../Pages';
 import { auth } from '../../firebaseConfig';
 import { userAtom } from '../../store/user.atom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
     const [user, setUser] = useAtom(userAtom)
 
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // sử dụng firebase 
+    // const handleLogin = async (event) => {
+    //     event.preventDefault();
+
+    //     try {
+    //         // Sử dụng hàm signInWithEmailAndPassword để đăng nhập với email và mật khẩu
+    //         const user = await signInWithEmailAndPassword(auth, username, password);
+    //         setUser(user);
+    //     } catch (error) {
+    //         // Xử lý lỗi từ Firebase và hiển thị thông báo lỗi tương ứng
+    //         const errorCode = error.code;
+    //         const errorMessage = error.message;
+    //         console.error("Lỗi đăng nhập:", errorCode, errorMessage);
+    //     }
+    // }
+
+    // sử dụng API 
     const handleLogin = async (event) => {
         event.preventDefault();
 
         try {
-            // Sử dụng hàm signInWithEmailAndPassword để đăng nhập với email và mật khẩu
-            const user = await signInWithEmailAndPassword(auth, username, password);
-            setUser(user);
+            const response = await axios.post('https://bach-users-api.onrender.com/login', { email, password })
+
+            const userData = response.data;
+            setUser(userData);
         } catch (error) {
-            // Xử lý lỗi từ Firebase và hiển thị thông báo lỗi tương ứng
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error("Lỗi đăng nhập:", errorCode, errorMessage);
+            console.error('Lỗi đăng nhập:', error);
         }
     }
-
+    console.log(user);
     return (
         <div>
             {user ? (
@@ -46,8 +63,8 @@ function Login() {
                                         type="text"
                                         className='border border-solid border-current rounded-lg col-span-2 pl-4'
                                         placeholder='Email'
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
                                 <div className='pb-6 grid grid-cols-3'>

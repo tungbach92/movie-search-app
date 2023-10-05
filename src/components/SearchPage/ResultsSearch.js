@@ -21,7 +21,7 @@ export default function ResultsSearch() {
     };
 
     return (
-        <div className='bg-black'>
+        <div className='bg-black m-auto min-h-[800px]'>
             <h2 className='py-8 font-medium text-3xl text-center text-white'> Kết quả tìm kiếm cho: {search} </h2>
 
             <div className='p-16'>

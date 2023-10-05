@@ -5,15 +5,15 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 function Footer() {
     return (
-        <div className='px-[30px] bg-black pt-2 text-white'>
-            <div className='flex gap-16 flex-col items-center md:flex-row md:items-start'  >
-                <div>
+        <div className='px-[30px] bg-black pt-2 text-white '>
+            <div className='flex flex-col items-center md:flex-row md:items-start lg:mx-[90px]' >
+                <div className='flex-1'>
                     <img 
                         src="https://seeklogo.com/images/M/movie-time-cinema-logo-8B5BE91828-seeklogo.com.png" alt=""
                         className='w-[200px]'
                     />
                 </div>
-                <div className='hidden md:block'>
+                <div className='flex-1 hidden md:block'>
                     <h1 className="text-2xl font-medium pb-4"> Kết nối với chúng tôi </h1>
                     <FacebookIcon />
                     <YouTubeIcon />
@@ -22,7 +22,7 @@ function Footer() {
                         className="w-[200px] pt-4"
                     />
                 </div>
-                <div >
+                <div className='flex-1'>
                     <h1 className="text-2xl font-medium pb-6 "> Chăm sóc khách hàng </h1>
                     <h2> Hotline: 1900 6017 </h2>
                     <h2> Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ Tết) </h2>
