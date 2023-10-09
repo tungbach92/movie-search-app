@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MovieSearch from '../Header/MovieSearch';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebaseConfig';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -17,6 +17,7 @@ const defaultData = {
 function Register() {
 
   const [formData, setFormData] = useState(defaultData);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,15 +36,15 @@ function Register() {
   //     await createUserWithEmailAndPassword(auth, email, password)
   //     alert('Bạn đã đăng ký thành công.')
   //   } catch (error) {
-  //     alert("Lỗi đăng ký:", error);    
+  //     alert("Lỗi đăng ký:", error);
   //   } finally {
   //     setFormData(defaultData)
   //   }
   // };
 
-  // sử dụng api với then 
-  const handleRegister = async () => {
-    
+  // sử dụng api với then
+  const handleRegister = async (e) => {
+    e.preventDefault()
     const { email, password } = formData
     if (!email || !password) {
       alert('Vui lòng nhập email và mật khẩu.');
@@ -51,13 +52,14 @@ function Register() {
     }
 
     // Gửi yêu cầu đăng ký người dùng thông qua API
-    axios.post('https://bach-users-api.onrender.com/register', { email, password })
-      .then(res => {
-        console.log('Đăng ký thành công:', res.data);
-      })
-      .catch(error => {
-        console.error('Lỗi đăng ký:', error);
-      });
+    try {
+      await axios.post('https://bach-users-api.onrender.com/register', { email, password })
+      navigate('/');
+    }
+    catch (e) {
+      console.log(e)
+    }
+
   };
 
 
@@ -82,7 +84,7 @@ function Register() {
               <input type="text" name="email" id="email" required
                 placeholder='huongmai17@gmail.com'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.email} 
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>

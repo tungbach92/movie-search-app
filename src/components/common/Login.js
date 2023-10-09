@@ -37,7 +37,7 @@ function Login() {
         event.preventDefault();
 
         try {
-            const response = await axios.post('https://bach-users-api.onrender.com/login', { email, password })
+            const response = await axios.post('/login', { email, password })
 
             const userData = response.data;
             setUser(userData);
