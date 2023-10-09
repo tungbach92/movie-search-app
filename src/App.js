@@ -13,7 +13,9 @@ import Profile from './components/Profile/Profile'
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebaseConfig';
 import axios from 'axios';
-import cookie from 'js-cookie'
+import {axiosConfigs} from "./configs/axios";
+
+axiosConfigs()
 
 function App() {
 
@@ -35,7 +37,7 @@ function App() {
   //   // Hàm kiểm tra trạng thái đăng nhập bằng API
   //   const checkLoginStatus = async () => {
   //     try {
-  //       const response = await axios.get('https://bach-users-api.onrender.com/onAuthStateChanged)');
+  //       const response = await axios.get('/onAuthStateChanged');
   //       const userData = response.data;
   //       setUser(userData);
   //     } catch (error) {
@@ -43,7 +45,7 @@ function App() {
   //     }
   //   };
 
-  //   if(!user && cookie.get('connect.sid')) {
+  //   if(!user) {
   //     checkLoginStatus();   // Gọi hàm kiểm tra trạng thái đăng nhập khi component được tạo
   //   }
   // }, [user]);
