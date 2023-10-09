@@ -11,7 +11,7 @@ const usePopularMovies = () => {
     const [popularMovies, setPopularMovies] = useState([]);
     const [search] = useAtom(searchAtom);
     
-    console.log(popularMovies);
+    // console.log(popularMovies);
     
     // console.log(new Set(popularMovies?.map(item=>item.genre_ids).flat())); => hiển thị các genre_ids trong mảng 
 

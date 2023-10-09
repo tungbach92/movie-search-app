@@ -41,7 +41,7 @@ function Register() {
   //   }
   // };
 
-
+  // sử dụng api với then 
   const handleRegister = async () => {
     
     const { email, password } = formData

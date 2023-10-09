@@ -11,11 +11,11 @@ import axios from 'axios';
 function Login() {
     const [user, setUser] = useAtom(userAtom)
 
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    
     // sử dụng firebase 
+    // const [username, setUsername] = useState('');
     // const handleLogin = async (event) => {
     //     event.preventDefault();
 
@@ -31,7 +31,8 @@ function Login() {
     //     }
     // }
 
-    // sử dụng API 
+
+    /* sử dụng API với async await */
     const handleLogin = async (event) => {
         event.preventDefault();
 
@@ -44,7 +45,8 @@ function Login() {
             console.error('Lỗi đăng nhập:', error);
         }
     }
-    console.log(user);
+
+
     return (
         <div>
             {user ? (
