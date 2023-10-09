@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MovieSearch from '../Header/MovieSearch';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebaseConfig';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -18,6 +18,7 @@ const defaultData = {
 function Register() {
 
   const [formData, setFormData] = useState(defaultData);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,31 +37,29 @@ function Register() {
   //     await createUserWithEmailAndPassword(auth, email, password)
   //     alert('Bạn đã đăng ký thành công.')
   //   } catch (error) {
-  //     alert("Lỗi đăng ký:", error);    
+  //     alert("Lỗi đăng ký:", error);
   //   } finally {
   //     setFormData(defaultData)
   //   }
   // };
 
-  // sử dụng api với then 
-
-  const handleRegister = () => {
-
+  // sử dụng api với then
+  const handleRegister = (e) => {
+e.preventDefault()
     const { email, password, fullName, phone, birthdate, gender } = formData
-
     if (!email || !password) {
       alert('Vui lòng nhập email và mật khẩu.');
       return;
     }
 
     // Gửi yêu cầu đăng ký người dùng thông qua API
-    axios.post('https://bach-users-api.onrender.com/register', { email, password, fullName, phone, birthdate, gender })
-      .then(res => {
-        console.log('Đăng ký thành công:', res.data);
-      })
-      .catch(error => {
-        console.error('Lỗi đăng ký:', error);
-      });
+    try {
+      await axios.post('https://bach-users-api.onrender.com/register', { email, password, fullName, phone, birthdate, gender })
+      navigate('/');
+    }
+    catch (e) {
+      console.log(e)
+    }
   };
 
 

@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { userAtom } from '../../store/user.atom';
+import axios from "axios";
 
 function Logout() {
 
@@ -19,9 +20,14 @@ function Logout() {
         setOpen(true);
     }
 
-    const handleLogout = () => {
-        setUser(null)
-        navigate('/login');
+    const handleLogout = async () => {
+        try {
+            await axios.post('/logout')
+            setUser(null)
+            navigate('/login');
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
