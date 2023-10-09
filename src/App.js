@@ -41,6 +41,7 @@ function App() {
         const userData = response.data;
         setUser(userData);
       } catch (error) {
+        console.error(error);
         setUser(null)
       }
     };
