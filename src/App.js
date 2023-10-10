@@ -19,34 +19,34 @@ function App() {
   const [user, setUser] = useAtom(userAtom)
   
   // khi request k bị logout
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setUser(user)  // Kiểm tra nếu người dùng đã đăng nhập bằng API trả về thông tin người dùng
-  //     } else {
-  //       setUser(null)
-  //     }
-  //   });
-  // },[])
-
-  
   useEffect(() => {
-    // Hàm kiểm tra trạng thái đăng nhập bằng API
-   
-    const checkLoginStatus = async () => {
-      try {
-        const response = await axios.get('https://bach-users-api.onrender.com/onAuthStateChanged)');
-        const userData = response.data;
-        setUser(userData);
-      } catch (error) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)  // Kiểm tra nếu người dùng đã đăng nhập bằng API trả về thông tin người dùng
+      } else {
         setUser(null)
       }
-    };
+    });
+  },[])
 
-    if(!user && cookie.get('connect.sid')) {
-      checkLoginStatus();   // Gọi hàm kiểm tra trạng thái đăng nhập khi component được tạo
-    }
-  }, [user]);
+  
+  // useEffect(() => {
+  //   // Hàm kiểm tra trạng thái đăng nhập bằng API
+   
+  //   const checkLoginStatus = async () => {
+  //     try {
+  //       const response = await axios.get('https://bach-users-api.onrender.com/onAuthStateChanged)');
+  //       const userData = response.data;
+  //       setUser(userData);
+  //     } catch (error) {
+  //       setUser(null)
+  //     }
+  //   };
+
+  //   if(!user && cookie.get('connect.sid')) {
+  //     checkLoginStatus();   // Gọi hàm kiểm tra trạng thái đăng nhập khi component được tạo
+  //   }
+  // }, [user]);
 
 
   return (

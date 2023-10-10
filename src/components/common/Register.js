@@ -10,6 +10,7 @@ const defaultData = {
   fullName: '',
   email: '',
   password: '',
+  phone: '',
   birthdate: '',
   gender: 'female',
 }
@@ -42,18 +43,21 @@ function Register() {
   // };
 
   // sử dụng api với then 
-  const handleRegister = async () => {
-    
-    const { email, password } = formData
+
+  const handleRegister = () => {
+
+    const { email, password, fullName, phone, birthdate, gender } = formData
+
     if (!email || !password) {
       alert('Vui lòng nhập email và mật khẩu.');
       return;
     }
 
     // Gửi yêu cầu đăng ký người dùng thông qua API
-    axios.post('https://bach-users-api.onrender.com/register', { email, password })
+    axios.post('https://bach-users-api.onrender.com/register', { email, password, fullName, phone, birthdate, gender })
       .then(res => {
         console.log('Đăng ký thành công:', res.data);
+          
       })
       .catch(error => {
         console.error('Lỗi đăng ký:', error);
@@ -82,13 +86,13 @@ function Register() {
               <input type="text" name="email" id="email" required
                 placeholder='huongmai17@gmail.com'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.email} 
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>
             <div className='pb-6 grid grid-cols-3'>
               <label htmlFor="password"> Mật khẩu :</label>
-              <input type="text" name="password" id="password" required
+              <input type="password" name="password" id="password" required
                 placeholder='Tối thiểu 6 kí tự'
                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
                 value={formData.password}
@@ -97,9 +101,18 @@ function Register() {
             </div>
           </div>
           <div className='pb-6 grid grid-cols-3'>
+            <label htmlFor="phone"> Số điện thoại :</label>
+            <input type="text" name="phone" id="phone" required
+              placeholder='0586311225'
+              className='border border-solid border-current rounded-lg col-span-2 pl-4'
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='pb-6 grid grid-cols-3'>
             <label htmlFor="birthdate"> Ngày sinh :</label>
             <input type="text" name="birthdate" id="birthdate" required
-              placeholder='VD : 02/02/2010'
+              placeholder='VD : 2023-09-21'
               className='border border-solid border-current rounded-lg col-span-2 pl-4'
               value={formData.birthdate}
               onChange={handleChange}
