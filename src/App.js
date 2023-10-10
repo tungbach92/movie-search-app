@@ -7,32 +7,32 @@ import MovieDetail from './components/common/MovieDetail';
 import Login from './components/common/Login';
 import Register from './components/common/Register';
 import Logout from './components/common/Logout';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from './firebaseConfig';
 import { useAtom } from 'jotai';
 import { userAtom } from './store/user.atom';
 import Profile from './components/Profile/Profile'
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from './firebaseConfig';
 import axios from 'axios';
 import cookie from 'js-cookie'
 
 function App() {
+
   const [user, setUser] = useAtom(userAtom)
   
   // khi request k bị logout
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user)  // Kiểm tra nếu người dùng đã đăng nhập bằng API trả về thông tin người dùng
-      } else {
-        setUser(null)
-      }
-    });
-  },[])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setUser(user)  // Kiểm tra nếu người dùng đã đăng nhập bằng API trả về thông tin người dùng
+  //     } else {
+  //       setUser(null)
+  //     }
+  //   });
+  // },[])
 
   
   // useEffect(() => {
   //   // Hàm kiểm tra trạng thái đăng nhập bằng API
-   
   //   const checkLoginStatus = async () => {
   //     try {
   //       const response = await axios.get('https://bach-users-api.onrender.com/onAuthStateChanged)');
