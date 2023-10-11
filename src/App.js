@@ -7,16 +7,17 @@ import MovieDetail from './components/common/MovieDetail';
 import Login from './components/common/Login';
 import Register from './components/common/Register';
 import Logout from './components/common/Logout';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from './firebaseConfig';
 import { useAtom } from 'jotai';
 import { userAtom } from './store/user.atom';
 import Profile from './components/Profile/Profile'
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from './firebaseConfig';
 import axios from 'axios';
-import cookie from 'js-cookie'
+import {axiosConfigs} from "./configs/axios";
+
+axiosConfigs()
 
 function App() {
-
   const [user, setUser] = useAtom(userAtom)
   
   // khi request k bị logout
@@ -31,22 +32,24 @@ function App() {
   // },[])
 
   
-  // useEffect(() => {
-  //   // Hàm kiểm tra trạng thái đăng nhập bằng API
-  //   const checkLoginStatus = async () => {
-  //     try {
-  //       const response = await axios.get('https://bach-users-api.onrender.com/onAuthStateChanged)');
-  //       const userData = response.data;
-  //       setUser(userData);
-  //     } catch (error) {
-  //       setUser(null)
-  //     }
-  //   };
+  useEffect(() => {
+    // Hàm kiểm tra trạng thái đăng nhập bằng API
 
-  //   if(!user && cookie.get('connect.sid')) {
-  //     checkLoginStatus();   // Gọi hàm kiểm tra trạng thái đăng nhập khi component được tạo
-  //   }
-  // }, [user]);
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axios.get('/onAuthStateChanged');
+        const userData = response.data;
+        setUser(userData);
+      } catch (error) {
+        console.error(error);
+        setUser(null)
+      }
+    };
+
+    if(!user) {
+      checkLoginStatus();   // Gọi hàm kiểm tra trạng thái đăng nhập khi component được tạo
+    }
+  }, [user]);
 
 
   return (

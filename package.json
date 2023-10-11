@@ -13,7 +13,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
-    "cookiejs": "^2.1.2",
+    "env-cmd": "^10.1.0",
     "firebase": "^10.4.0",
     "jotai": "^2.4.1",
     "js-cookie": "^3.0.5",
@@ -26,8 +26,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.development react-scripts start",
+    "stg": "env-cmd -f .env.stg react-scripts start",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
