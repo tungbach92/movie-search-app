@@ -14,6 +14,15 @@ function UserInfo() {
     const [birthdateState, setBirthdateState] = useState(user?.birthdate);
     const [genderState, setGenderState] = useState(user?.gender);
 
+    useEffect(()=>{
+        setFullNameState(user?.fullName)
+        setEmailState(user?.email)
+        setBirthdateState(user?.birthdate)
+        setGenderState(user?.gender)
+    },[user])
+
+    console.log(user)
+
     const handleUpdate = (e) => {
         e.preventDefault()
         const updatedUser = {
