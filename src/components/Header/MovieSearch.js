@@ -72,7 +72,7 @@ function MovieSearch() {
         setAnchorEl(null);
     };
 
-
+    
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed" sx={{ backgroundColor: 'black' }}>
@@ -122,8 +122,8 @@ function MovieSearch() {
                                     </div>
                                 ) : (
                                     <div>
-                                        <MenuItem>
-                                            Xin chào, ...
+                                        <MenuItem className='font-bold italic'>
+                                            {user?.email}
                                         </MenuItem>
                                         <MenuItem onClick={() => {
                                             navigate("/profile")
