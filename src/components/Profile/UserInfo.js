@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { userAtom } from '../../store/user.atom'
 import { Avatar } from '@mui/material';
 import axios from 'axios';
@@ -7,7 +7,6 @@ import axios from 'axios';
 function UserInfo() {
 
     const [user] = useAtom(userAtom)
-    console.log(user);
 
     const [fullNameState, setFullNameState] = useState(user?.fullName);
     const [emailState, setEmailState] = useState(user?.email);
@@ -17,17 +16,16 @@ function UserInfo() {
 
     const handleUpdate = (e) => {
         e.preventDefault()
-
         const updatedUser = {
+            email: emailState,
             fullName: fullNameState,
             phone: phoneState,
             birthdate: birthdateState,
             gender: genderState,
         }
 
-        console.log('Thông tin mới:', updatedUser)
 
-        axios.post(`https://bach-users-api.onrender.com/update/${user.user_id}`, updatedUser)
+        axios.post(`/update/${user.user_id}`, updatedUser)
             .then((res) => {
                 console.log('Cập nhật thành công', res.data);
             })

@@ -54,7 +54,7 @@ function Register() {
 
     // Gửi yêu cầu đăng ký người dùng thông qua API
     try {
-      await axios.post('https://bach-users-api.onrender.com/register', { email, password, fullName, phone, birthdate, gender })
+      await axios.post('/register', { email, password, fullName, phone, birthdate, gender })
       navigate('/');
 
     }
