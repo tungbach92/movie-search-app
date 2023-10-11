@@ -57,7 +57,6 @@ function Register() {
     axios.post('https://bach-users-api.onrender.com/register', { email, password, fullName, phone, birthdate, gender })
       .then(res => {
         console.log('Đăng ký thành công:', res.data);
-          
       })
       .catch(error => {
         console.error('Lỗi đăng ký:', error);
