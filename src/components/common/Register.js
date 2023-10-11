@@ -44,8 +44,8 @@ function Register() {
   // };
 
   // sử dụng api với then
-  const handleRegister = (e) => {
-e.preventDefault()
+  const handleRegister = async (e) => {
+    e.preventDefault()
     const { email, password, fullName, phone, birthdate, gender } = formData
     if (!email || !password) {
       alert('Vui lòng nhập email và mật khẩu.');

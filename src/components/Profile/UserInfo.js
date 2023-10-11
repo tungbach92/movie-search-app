@@ -2,59 +2,39 @@ import { useAtom } from 'jotai'
 import React, { useState } from 'react'
 import { userAtom } from '../../store/user.atom'
 import { Avatar } from '@mui/material';
+import axios from 'axios';
 
 function UserInfo() {
 
-    const [user, setUser] = useAtom(userAtom)
+    const [user] = useAtom(userAtom)
     console.log(user);
 
-    // const { email } = user;
-
     const [fullNameState, setFullNameState] = useState(user?.fullName);
+    const [emailState, setEmailState] = useState(user?.email);
     const [phoneState, setPhoneState] = useState(user?.phone);
     const [birthdateState, setBirthdateState] = useState(user?.birthdate);
     const [genderState, setGenderState] = useState(user?.gender);
 
-    /*
-    const handleUpdate = async (event) => {
-        event.preventDefault();
-
-        try {
-            // Gửi yêu cầu cập nhật thông tin lên máy chủ hoặc API
-            const response = await axios.post('https://your-api-url/update-profile', { fullName, phoneNumber, gender, birthdate });
-
-            // Kiểm tra xem cập nhật thành công hay không dựa trên phản hồi từ máy chủ/API
-            if (response.status === 200) {
-                // Cập nhật thành công
-                console.log('Thông tin đã được cập nhật thành công');
-            } else {
-                // Xử lý lỗi hoặc hiển thị thông báo lỗi
-                console.error('Lỗi khi cập nhật thông tin');
-            }
-        } catch (error) {
-            // Xử lý lỗi từ phía máy chủ hoặc API
-            console.error('Lỗi khi gửi yêu cầu cập nhật:', error);
-        }
-    }
-    */
-
     const handleUpdate = (e) => {
         e.preventDefault()
-        
-        // const updatedUser = { ...user };        // Tạo bản sao của user (để tránh thay đổi user trực tiếp)
-        // console.log('Thông tin mới:', updatedUser);
-        // setUser(updatedUser);       // Cập nhật state user nếu cần
 
         const updatedUser = {
             fullName: fullNameState,
             phone: phoneState,
             birthdate: birthdateState,
             gender: genderState,
-        };
+        }
 
-        console.log('Thông tin mới:', updatedUser);
+        console.log('Thông tin mới:', updatedUser)
 
-    };
+        axios.post(`https://bach-users-api.onrender.com/update/${user.user_id}`, updatedUser)
+            .then((res) => {
+                console.log('Cập nhật thành công', res.data);
+            })
+            .catch((err) => {
+                console.error('Lỗi khi cập nhật thông tin:', err);
+            })
+    }
 
     return (
         <div className='flex border border-solid border-gray-200 rounded-md h-[500px]'>
@@ -79,9 +59,10 @@ function UserInfo() {
                         </div>
                         <div className='pb-6 grid grid-cols-3'>
                             <label htmlFor="email"> Email :</label>
-                            <input type="text" name="email" id="email" disabled
+                            <input type="text" name="email" id="email" required
                                 className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                                value={user?.email}
+                                value={emailState}
+                                onChange={(e) => setEmailState(e.target.value)}
                             />
                         </div>
                         <div className='pb-6 grid grid-cols-3'>
