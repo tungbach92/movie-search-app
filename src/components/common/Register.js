@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MovieSearch from '../Header/MovieSearch';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebaseConfig';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -13,6 +13,24 @@ const defaultData = {
   phone: '',
   birthdate: '',
   gender: 'female',
+}
+
+const validateEmail = (email) => {
+  if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+    return 'Email không hợp lệ.';
+  }
+}
+
+const validatePhone = (phone) => {
+  if (!phone || !/^\d+$/.test(phone)) {
+    return 'Vui lòng nhập số điện thoại hợp lệ.';
+  }
+}
+
+const validateBirthdate = (birthdate) => {
+  if (!birthdate || !/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
+    return 'Vui lòng sử dụng định dạng YYYY-MM-DD.';
+  }
 }
 
 function Register() {
@@ -44,12 +62,27 @@ function Register() {
   // };
 
   // sử dụng api với then
-  
+
   const handleRegister = async (e) => {
     e.preventDefault()
+
     const { email, password, fullName, phone, birthdate, gender } = formData
     if (!email || !password) {
       alert('Vui lòng nhập email và mật khẩu.');
+      return;
+    }
+
+    const emailError = validateEmail(email);
+    const phoneError = validatePhone(phone);
+    const birthdateError = validateBirthdate(birthdate);
+
+    if (emailError || phoneError || birthdateError) {
+      console.error(
+        `Vui lòng sửa các lỗi sau:\n
+      ${emailError ? '-' + emailError + '\n' : ''}
+      ${phoneError ? '-' + phoneError + '\n' : ''}
+      ${birthdateError ? '- ' + birthdateError : ''}`
+      );
       return;
     }
 
