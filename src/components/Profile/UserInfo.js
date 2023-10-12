@@ -7,7 +7,6 @@ import axios from 'axios';
 function UserInfo() {
 
     const [user, setUser] = useAtom(userAtom)
-    // console.log(user);
 
     const [fullNameState, setFullNameState] = useState(user?.fullName);
     const [emailState, setEmailState] = useState(user?.email);
@@ -15,8 +14,40 @@ function UserInfo() {
     const [birthdateState, setBirthdateState] = useState(user?.birthdate);
     const [genderState, setGenderState] = useState(user?.gender);
 
+    const validateEmail = (email) => {
+        if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+            return 'Email không hợp lệ.';
+        }
+    }
+
+    const validatePhone = (phone) => {
+        if (!phone || !/^\d+$/.test(phone)) {
+            return 'Vui lòng nhập số điện thoại hợp lệ.';
+        }
+    }
+
+    const validateBirthdate = (birthdate) => {
+        if (!birthdate || !/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
+            return 'Vui lòng sử dụng định dạng YYYY-MM-DD.';
+        }
+    }
+
     const handleUpdate = async (e) => {
         e.preventDefault()
+
+        const emailError = validateEmail(emailState);
+        const phoneError = validatePhone(phoneState);
+        const birthdateError = validateBirthdate(birthdateState);
+
+        if (emailError || phoneError || birthdateError) {
+            console.error(
+            `Vui lòng sửa các lỗi sau:\n
+            ${emailError ? '-' + emailError + '\n' : ''}
+            ${phoneError ? '-' + phoneError + '\n' : ''}
+            ${birthdateError ? '- ' + birthdateError : ''}`
+            );
+            return;
+        }
 
         const updatedUser = {
             fullName: fullNameState,
@@ -30,7 +61,7 @@ function UserInfo() {
 
         try {
             const response = await axios.post(`/update/${user.user_id}`, updatedUser);
-            
+
             // Cập nhật atom userAtom với dữ liệu phản hồi từ API
             setUser(response.data);
             console.log('Cập nhật thành công', response.data);
@@ -39,13 +70,6 @@ function UserInfo() {
             console.error('Lỗi khi cập nhật thông tin:', e);
         }
 
-        // axios.post(`https://bach-users-api.onrender.com/update/${user.user_id}`, updatedUser)
-        //     .then((res) => {
-        //         console.log('Cập nhật thành công', res.data);
-        //     })
-        //     .catch((err) => {
-        //         console.error('Lỗi khi cập nhật thông tin:', err);
-        //     })
     }
 
     return (
