@@ -44,6 +44,7 @@ function Register() {
   // };
 
   // sử dụng api với then
+  
   const handleRegister = async (e) => {
     e.preventDefault()
     const { email, password, fullName, phone, birthdate, gender } = formData
@@ -56,13 +57,11 @@ function Register() {
     try {
       await axios.post('https://bach-users-api.onrender.com/register', { email, password, fullName, phone, birthdate, gender })
       navigate('/');
-
     }
     catch (e) {
       console.log(e)
     }
-  };
-
+  }
 
   return (
     <div>

@@ -6,8 +6,8 @@ import axios from 'axios';
 
 function UserInfo() {
 
-    const [user] = useAtom(userAtom)
-    console.log(user);
+    const [user, setUser] = useAtom(userAtom)
+    // console.log(user);
 
     const [fullNameState, setFullNameState] = useState(user?.fullName);
     const [emailState, setEmailState] = useState(user?.email);
@@ -15,11 +15,12 @@ function UserInfo() {
     const [birthdateState, setBirthdateState] = useState(user?.birthdate);
     const [genderState, setGenderState] = useState(user?.gender);
 
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault()
 
         const updatedUser = {
             fullName: fullNameState,
+            email: emailState,
             phone: phoneState,
             birthdate: birthdateState,
             gender: genderState,
@@ -27,13 +28,24 @@ function UserInfo() {
 
         console.log('Thông tin mới:', updatedUser)
 
-        axios.post(`https://bach-users-api.onrender.com/update/${user.user_id}`, updatedUser)
-            .then((res) => {
-                console.log('Cập nhật thành công', res.data);
-            })
-            .catch((err) => {
-                console.error('Lỗi khi cập nhật thông tin:', err);
-            })
+        try {
+            const response = await axios.post(`/update/${user.user_id}`, updatedUser);
+            
+            // Cập nhật atom userAtom với dữ liệu phản hồi từ API
+            setUser(response.data);
+            console.log('Cập nhật thành công', response.data);
+        }
+        catch (e) {
+            console.error('Lỗi khi cập nhật thông tin:', e);
+        }
+
+        // axios.post(`https://bach-users-api.onrender.com/update/${user.user_id}`, updatedUser)
+        //     .then((res) => {
+        //         console.log('Cập nhật thành công', res.data);
+        //     })
+        //     .catch((err) => {
+        //         console.error('Lỗi khi cập nhật thông tin:', err);
+        //     })
     }
 
     return (
