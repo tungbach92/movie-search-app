@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { userAtom } from '../../store/user.atom'
 import { Avatar } from '@mui/material';
 import axios from 'axios';
@@ -13,6 +13,14 @@ function UserInfo() {
     const [phoneState, setPhoneState] = useState(user?.phone);
     const [birthdateState, setBirthdateState] = useState(user?.birthdate);
     const [genderState, setGenderState] = useState(user?.gender);
+
+    useEffect(() => {
+        setFullNameState(user?.fullName)
+        setEmailState(user?.email)
+        setPhoneState(user?.phone)
+        setGenderState(user?.gender)
+        setBirthdateState(user?.birthdate)
+    }, [user])
 
     const validateEmail = (email) => {
         if (!email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
@@ -41,7 +49,7 @@ function UserInfo() {
 
         if (emailError || phoneError || birthdateError) {
             console.error(
-            `Vui lòng sửa các lỗi sau:\n
+                `Vui lòng sửa các lỗi sau:\n
             ${emailError ? '-' + emailError + '\n' : ''}
             ${phoneError ? '-' + phoneError + '\n' : ''}
             ${birthdateError ? '- ' + birthdateError : ''}`

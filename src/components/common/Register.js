@@ -72,6 +72,7 @@ function Register() {
       return;
     }
 
+
     const emailError = validateEmail(email);
     const phoneError = validatePhone(phone);
     const birthdateError = validateBirthdate(birthdate);
@@ -85,6 +86,7 @@ function Register() {
       );
       return;
     }
+
 
     // Gửi yêu cầu đăng ký người dùng thông qua API
     try {
@@ -102,35 +104,36 @@ function Register() {
 
       <div className='m-[150px] bg-[#f0fdf4] border border-solid border-black rounded-md p-8'>
         <form className='max-h-[500px]'>
-          <div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="fullName"> Họ tên :</label>
-              <input type="text" name="fullName" id="fullName" required
-                placeholder='VD: Huong ...'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.fullName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="email"> Email :</label>
-              <input type="text" name="email" id="email" required
-                placeholder='huongmai17@gmail.com'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className='pb-6 grid grid-cols-3'>
-              <label htmlFor="password"> Mật khẩu :</label>
-              <input type="password" name="password" id="password" required
-                placeholder='Tối thiểu 6 kí tự'
-                className='border border-solid border-current rounded-lg col-span-2 pl-4'
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
+          <div className='pb-6 grid grid-cols-3'>
+            <label htmlFor="fullName"> Họ tên :</label>
+            <input type="text" name="fullName" id="fullName" required
+              placeholder='VD: Huong ...'
+              className='border border-solid border-current rounded-lg col-span-2 pl-4'
+              value={formData.fullName}
+              onChange={handleChange}
+            />
           </div>
+
+          <div className='pb-6 grid grid-cols-3'>
+            <label htmlFor="email"> Email :</label>
+            <input type="text" name="email" id="email" required
+              placeholder='huongmai17@gmail.com'
+              className='border border-solid border-current rounded-lg col-span-2 pl-4'
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className='pb-6 grid grid-cols-3'>
+            <label htmlFor="password"> Mật khẩu :</label>
+            <input type="password" name="password" id="password" required
+              placeholder='Tối thiểu 6 kí tự'
+              className='border border-solid border-current rounded-lg col-span-2 pl-4'
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className='pb-6 grid grid-cols-3'>
             <label htmlFor="phone"> Số điện thoại :</label>
             <input type="text" name="phone" id="phone" required
@@ -140,6 +143,7 @@ function Register() {
               onChange={handleChange}
             />
           </div>
+
           <div className='pb-6 grid grid-cols-3'>
             <label htmlFor="birthdate"> Ngày sinh :</label>
             <input type="text" name="birthdate" id="birthdate" required
@@ -149,6 +153,7 @@ function Register() {
               onChange={handleChange}
             />
           </div>
+
           <div className='pb-6 grid grid-cols-3'>
             <label htmlFor="gender"> Giới tính :</label>
             <select name="gender" id="gender" required
