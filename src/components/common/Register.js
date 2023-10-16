@@ -13,6 +13,7 @@ const defaultData = {
   phone: '',
   birthdate: '',
   gender: 'female',
+  imageUrl: ''
 }
 
 const validateEmail = (email) => {

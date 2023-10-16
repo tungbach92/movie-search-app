@@ -1,8 +1,12 @@
 import { useAtom } from 'jotai'
 import React, { useEffect, useState } from 'react'
 import { userAtom } from '../../store/user.atom'
-import { Avatar } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import axios from 'axios';
+import firebase from 'firebase/app';
+import 'firebase/storage';
+import { storage } from '../../firebaseConfig';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 function UserInfo() {
 
@@ -13,6 +17,10 @@ function UserInfo() {
     const [phoneState, setPhoneState] = useState(user?.phone);
     const [birthdateState, setBirthdateState] = useState(user?.birthdate);
     const [genderState, setGenderState] = useState(user?.gender);
+
+    const [loading, setLoading] = useState(false)
+    const [file, setFile] = useState(null)
+    const [image, setImage] = useState(null)
 
     useEffect(() => {
         setFullNameState(user?.fullName)
@@ -39,6 +47,7 @@ function UserInfo() {
             return 'Vui lòng sử dụng định dạng YYYY-MM-DD.';
         }
     }
+
 
     const handleUpdate = async (e) => {
         e.preventDefault()
@@ -68,23 +77,61 @@ function UserInfo() {
         console.log('Thông tin mới:', updatedUser)
 
         try {
+            setLoading(true)
             const response = await axios.post(`/update/${user.user_id}`, updatedUser);
-
-            // Cập nhật atom userAtom với dữ liệu phản hồi từ API
-            setUser(response.data);
+            setUser(response.data)              // Cập nhật atom userAtom với dữ liệu phản hồi từ API
             console.log('Cập nhật thành công', response.data);
-        }
-        catch (e) {
+        } catch (e) {
             console.error('Lỗi khi cập nhật thông tin:', e);
         }
 
     }
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setFile(file);
+    };
+
+    const handleUpload = async () => {
+        try {
+            if (file) {
+                const imageRef = ref(storage, `images/${file.name}`);
+                const snapshot = await uploadBytes(imageRef, file);
+                const url = await getDownloadURL(snapshot.ref);
+                setImage(url)
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+
+    console.log(image);
+    console.log(file);
+
     return (
         <div className='flex border border-solid border-gray-200 rounded-md h-[500px]'>
 
             <div className=' bg-emerald-50 w-[300px] text-center pt-[80px]'>
-                <Avatar src="/broken-image.jpg" sx={{ width: '80px', height: '80px', margin: 'auto', }} />
+                <Button color="primary" aria-label="upload picture" component="label" >
+                    {loading ? (
+                        <CircularProgress />
+                    ) : (
+                        <div className={'flex flex-col items-center'}>
+                            <img className='object-contain rounded-full' width={80} height={80}
+                                src={!image ? '/images/upload.svg' : image}
+                                alt='upload-icon'
+                            />
+                        </div>
+                    )}
+
+                    <input type="file" id={`upload-image`} accept=".jpg, .jpg, .png" hidden
+                        onChange={event => handleImageChange(event)}
+                    />
+                </Button>
+                <button onClick={handleUpload}> Upload Image </button>
+
+
                 <div className='mt-4 '> {user?.email} </div>
             </div>
 
@@ -101,6 +148,7 @@ function UserInfo() {
                                 onChange={(e) => setFullNameState(e.target.value)}
                             />
                         </div>
+
                         <div className='pb-6 grid grid-cols-3'>
                             <label htmlFor="email"> Email :</label>
                             <input type="text" name="email" id="email" required
